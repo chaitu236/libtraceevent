@@ -119,7 +119,7 @@ LIBTRACEEVENT_SHARED = $(bdir)/libtraceevent.so.$(EVENT_PARSE_VERSION)
 
 EP_HEADERS_DIR = $(src)/include/traceevent
 
-INCLUDES = -I. -I $(srctree)/include -I $(EP_HEADERS_DIR) $(CONFIG_INCLUDES)
+INCLUDES = -I. -I $(srctree)/include -I $(EP_HEADERS_DIR) $(CONFIG_INCLUDES) -I /usr/include
 
 export LIBTRACEEVENT_STATIC LIBTRACEEVENT_SHARED EP_HEADERS_DIR
 
@@ -187,7 +187,7 @@ CMD_TARGETS = $(LIB_TARGET) $(PKG_CONFIG_FILE)
 
 TARGETS = $(CMD_TARGETS)
 
-all: all_cmd plugins
+all: all_cmd
 
 $(bdir):
 	$(Q)mkdir -p $(bdir)
@@ -334,12 +334,11 @@ define install_ld_config
 endef
 endif # DESTDIR = ""
 
-install: install_libs install_plugins
+install: install_libs
 
-install_libs: libs install_headers install_pkgconfig
+install_libs: libs install_headers
 	$(Q)$(call do_install,$(LIBTRACEEVENT_SHARED),$(libdir_SQ)); \
 		cp -fpR $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
-	$(Q)$(call install_ld_config)
 
 install_pkgconfig: $(PKG_CONFIG_FILE)
 	$(Q)$(call do_install_pkgconfig_file,$(prefix))
