@@ -58,7 +58,7 @@ do_compile =							\
 
 do_app_build =						\
 	($(print_app_build)				\
-	$(CC) $^ -rdynamic -o $@ $(LDFLAGS) $(CONFIG_LIBS) $(LIBS))
+	$(CC) $^ -o $@ $(LDFLAGS) $(CONFIG_LIBS) $(LIBS))
 
 do_build_static_lib =				\
 	($(print_static_lib_build)		\
@@ -69,7 +69,7 @@ do_build_static_lib =				\
 
 do_compile_shared_library =			\
 	($(print_shared_lib_compile)		\
-	$(CC) --shared $^ '-Wl,-soname,$(1),-rpath=$$ORIGIN' -o $@ $(LDFLAGS) $(LIBS))
+	$(CC) --shared $^ -o $@ $(LDFLAGS) $(LIBS))
 
 do_compile_plugin_obj =				\
 	($(print_plugin_obj_compile)		\
@@ -93,7 +93,7 @@ do_clean =					\
 
 do_sample_build =							\
 	$(Q)($(print_sample_build)					\
-	$(CC) -o $1 $2 $(CFLAGS) $(LIBTRACEEVENT_STATIC) -ldl)
+	$(CC) -o $1 $2 $(CFLAGS) $(LIBTRACEEVENT_STATIC))
 
 do_sample_obj =									\
 	$(Q)($(print_sample_obj)						\
