@@ -336,7 +336,7 @@ endif # DESTDIR = ""
 
 install: install_libs
 
-install_libs: libs install_headers
+install_libs: libs install_headers install_pkgconfig
 	$(Q)$(call do_install,$(LIBTRACEEVENT_SHARED),$(libdir_SQ)); \
 		cp -fpR $(LIB_INSTALL) $(DESTDIR)$(libdir_SQ)
 
